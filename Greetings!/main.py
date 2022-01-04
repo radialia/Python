@@ -1,0 +1,6 @@
+print("Answer a few questions and see them make a sentence\n")
+first_name = input("Hi! What's your first name? ")
+last_name = input("What's your surname? ")
+user_age = input("How many years old are you? ")
+city_name = input("Lastly, where do you live? ")
+print(f"\nHi! So your name is {first_name} {last_name}. You are {user_age} years old and you live in {city_name}. Nice to meet you!!")
