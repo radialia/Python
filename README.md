@@ -1,2 +1,2 @@
-# 100DaysOfCode
-Kicking of the challenge of **`100DaysOfCode`** using [Python](https://www.python.org)
+# SpeedyPython
+A repository of projects and programs made using [Python](https://www.python.org)
