@@ -97,6 +97,8 @@ levels = [
 ]
 
 # Welcome menu
+
+
 def display():
     print("""
  _                                             
@@ -113,10 +115,10 @@ def display():
     print("You need to guess the word before the man is hanged!\nWith every wrong guess the man progresses to be hanged!\nGuesses you got: 8\n\nBEST OF LUCK!\n")
 
 
-
 def difficulty():
     print("\nSelect a difficulty\n")
-    level = int(input("Enter the number of your difficulty:\n1.Easy\n2.Intermediate\n3.Hard\n>>> "))
+    level = int(input(
+        "Enter the number of your difficulty:\n1.Easy\n2.Intermediate\n3.Hard\n>>> "))
     print("\n")
     easy_difficulty = []
     intermediate_difficulty = []
@@ -139,7 +141,6 @@ def difficulty():
         return hard_difficulty
 
 
-
 def level_executer(array):
     word = array[randint(0, (len(array) - 1))]
     return word
@@ -159,23 +160,29 @@ def game():
 
     while not guessed:
         print(f" ".join(guess_display))
-        guess = input("\nEnter your guess: ")
+        guess = input("\nEnter your guess: ").lower()
 
-        if("_" in f" ".join(guess_display)):
-            if(guess in word):
-                guess_display[word.index(guess)] = guess
-            elif(guess not in word):
-                print(f"\nThere is no {guess} in the word! You lose a life")
-                guesses += 1
-                print(f"You have {8-guesses} left")
-                print(levels[guesses])
-                if(guesses == int(levels.__len__() - 1)):
-                    print(f"\nYou have exhausted all of your lifelines! The word was {word}. The man is hanged! Game Over!")
-                    guessed = True
-                
-        elif("_" not in f" ".join(guess_display)):
-            print(f"You have guessed the word in {guesses}")
+        if guess in guess_display:
+            print(f"You've already guessed {guess}")
+
+        for position in range(word.__len__()):
+            letter = word[position]
+            if letter == guess:
+                guess_display[position] = guess
+        if(guess not in word):
+            print(f"\nThere is no {guess} in the word! You lose a life")
+            guesses += 1
+            print(f"You have {8-guesses} left")
+            print(levels[guesses])
+            if(guesses == int(levels.__len__() - 1)):
+                print(
+                    f"\nYou have exhausted all of your lifelines! The word was {word}. The man is hanged! Game Over!")
+                guessed = True
+
+        if("_" not in f" ".join(guess_display)):
+            print(f"You have guessed the word!")
             guessed = True
+
 
 if __name__ == '__main__':
     game()
