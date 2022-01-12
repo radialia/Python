@@ -96,10 +96,11 @@ levels = [
     """,
 ]
 
-# Welcome menu
-
 
 def display():
+    """
+    This function is responsible for the printing of the ASCII art and welcome message on the screen
+    """
     print("""
  _                                             
 | |                                            
@@ -110,26 +111,28 @@ def display():
                     __/ |                      
                    |___/                       
         """)
-    print("Hello!! Welcome to the hangman game!")
-    print(levels[0])
-    print("You need to guess the word before the man is hanged!\nWith every wrong guess the man progresses to be hanged!\nGuesses you got: 8\n\nBEST OF LUCK!\n")
+    print(
+        f"Hello!! Welcome to the hangman game!\n{levels[0]}\nYou need to guess the word before the man is hanged!\nWith every wrong guess the man progresses to be hanged!\nGuesses you got: 8\n\nBEST OF LUCK!\n")
 
 
 def difficulty():
-    print("\nSelect a difficulty\n")
-    level = int(input(
-        "Enter the number of your difficulty:\n1.Easy\n2.Intermediate\n3.Hard\n>>> "))
-    print("\n")
+    """
+    This function is responsible for getting the level as user input and appending the words according to their lengths in the respective arrays.
+    :return = Array of difficulty
+    """
     easy_difficulty = []
     intermediate_difficulty = []
     hard_difficulty = []
+
+    print("\nSelect a difficulty\n")
+    level = int(input(
+        "Enter the number of your difficulty:\n1.Easy\n2.Intermediate\n3.Hard\n>>> "))
+
     for words in word_list:
-        if(level == 1):
-            if(words.__len__() <= 5):
-                easy_difficulty.append(words)
-        elif(level == 2):
-            if(words.__len__() <= 7):
-                intermediate_difficulty.append(words)
+        if(words.__len__() <= 5):
+            easy_difficulty.append(words)
+        elif(words.__len__() <= 7):
+            intermediate_difficulty.append(words)
         else:
             hard_difficulty.append(words)
 
@@ -142,12 +145,19 @@ def difficulty():
 
 
 def level_executer(array):
+    """
+    This function is responsible for getting a random word from the returned array
+    :param = array of words chosen according to difficulty
+    :return = the random chosen word from the array of words passed as a paramater
+    """
     word = array[randint(0, (len(array) - 1))]
     return word
 
 
-# Functionality of the Game
 def game():
+    """
+    This function is responsible for the the logic of the game
+    """
     display()
 
     word = level_executer(difficulty())
@@ -155,7 +165,7 @@ def game():
     guessed = False
     guess_display = []
 
-    for letters in word:
+    for _ in word:
         guess_display.append("_ ")
 
     while not guessed:
@@ -169,6 +179,7 @@ def game():
             letter = word[position]
             if letter == guess:
                 guess_display[position] = guess
+
         if(guess not in word):
             print(f"\nThere is no {guess} in the word! You lose a life")
             guesses += 1
